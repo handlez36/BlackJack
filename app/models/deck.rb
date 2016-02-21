@@ -21,11 +21,13 @@ class Deck < ActiveRecord::Base
   end
   
   def play_card(id)
-    cards.update_attributes( played: true ).where( id: id )
+    card = Card.find(id)
+    card.played = true
+    card.save
   end
 
   def all_cards_played?
-    unplayed_cards = cards_arr.select { |card| card.played == false }
+    unplayed_cards = @cards_arr.select { |card| card.played == false }
     unplayed_cards.count == 0
   end
   
@@ -33,13 +35,24 @@ class Deck < ActiveRecord::Base
     @cards_arr.shuffle!
   end
   
+  def setup
+    @test = "Brandon"
+  end
+  
+  def access
+    @test
+  end
+  
   private
   
   def set_up_deck
+    puts "In deck setup"
     (2..14).each { |n| self.cards << Card.create( suit: 0, raw_value: n ) } # Clubs
     (2..14).each { |n| self.cards << Card.create( suit: 1, raw_value: n ) } # Spades
     (2..14).each { |n| self.cards << Card.create( suit: 2, raw_value: n ) } # Diamonds
     (2..14).each { |n| self.cards << Card.create( suit: 3, raw_value: n ) } # Hearts
     @cards_arr = self.cards.to_a
+    
+    puts "How many in array: #{@cards_arr.count}"
   end
 end

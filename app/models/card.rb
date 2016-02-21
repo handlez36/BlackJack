@@ -15,6 +15,11 @@ class Card < ActiveRecord::Base
     "#{get_card_value} of #{suit.capitalize}"
   end
   
+  def ==(other_card)
+    self.deck == other_card.deck &&
+      self.suit == other_card.suit &&
+      self.raw_value == other_card.raw_value
+  end
   
   def get_card_value
     case raw_value
@@ -25,9 +30,8 @@ class Card < ActiveRecord::Base
       else raw_value
     end
   end
+  
         
-    
-      
         
 
         

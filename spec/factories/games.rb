@@ -10,6 +10,12 @@ FactoryGirl.define do
     suit        2
     raw_value   10
     association :user
+    association :deck
+  end
+end
+
+FactoryGirl.define do
+  factory :deck do
   end
 end
 

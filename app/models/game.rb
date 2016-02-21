@@ -1,6 +1,6 @@
 class Game < ActiveRecord::Base
   attr_accessor :num_of_decks
-  before_create :set_defaults, :initialize_deck
+  after_create :set_defaults, :initialize_deck
   has_many :users
   has_many :decks
   has_many :cards, through: :decks
@@ -15,10 +15,6 @@ class Game < ActiveRecord::Base
     @num_of_decks.times do |n|
       new_deck = self.decks.create
       new_deck.shuffle
-#      (2..14).each { |n| new_deck.cards << Card.create( suit: 0, raw_value: n ) } # Clubs
-#      (2..14).each { |n| new_deck.cards << Card.create( suit: 1, raw_value: n ) } # Spades
-#      (2..14).each { |n| new_deck.cards << Card.create( suit: 2, raw_value: n ) } # Diamonds
-#      (2..14).each { |n| new_deck.cards << Card.create( suit: 3, raw_value: n ) } # Hearts
     end
   end
   
