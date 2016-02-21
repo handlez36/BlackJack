@@ -1,6 +1,6 @@
 class Card < ActiveRecord::Base
   before_create :set_defaults
-  belongs_to :game
+  belongs_to :deck
   belongs_to :user
   
   enum suit: [ :clubs, :spades, :diamonds, :hearts ]
