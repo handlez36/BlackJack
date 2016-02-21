@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160221071641) do
+ActiveRecord::Schema.define(version: 20160221124615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,9 +21,9 @@ ActiveRecord::Schema.define(version: 20160221071641) do
     t.integer  "suit"
     t.integer  "raw_value"
     t.integer  "card_value"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.boolean  "played",     default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean  "played"
     t.integer  "game_id"
     t.integer  "user_id"
   end
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20160221071641) do
     t.decimal  "current_bet"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "turn_id"
   end
 
   create_table "users", force: :cascade do |t|

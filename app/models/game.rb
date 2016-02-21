@@ -1,12 +1,12 @@
 class Game < ActiveRecord::Base
   attr_accessor :num_of_decks
-  before_save :set_defaults, :initialize_deck
+  before_create :set_defaults, :initialize_deck
   has_many :users
   has_many :cards
   
   def set_defaults
-    current_bet ||= 0.00
-    turn ||= 1
+    self.current_bet ||= 0.00
+    self.turn_id ||= 1
     @num_of_decks ||= 1
   end
   
