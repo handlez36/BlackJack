@@ -1,0 +1,18 @@
+.splash-page {
+  background: url('/assets/blackjack_bg.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 600px;
+}
+
+.splash-page .title {
+  font-size: 16px;
+  color: white;
+}
+
+.welcome {
+  font-size: 14px;
+  color: white;
+}

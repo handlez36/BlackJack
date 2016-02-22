@@ -1,0 +1,24 @@
+<div class="my-games col-xs-10 col-xs-offset-1">
+  <h1>My Games</h1>
+  <div class="in-progress">
+    <% if current_game.nil? %>
+      No games currently active &nbsp;
+      <%= link_to "Create game", new_game_path, class: 'btn btn-primary btn-xs' %>
+    <% else %>
+      <h3><%= current_game.id %></h3>
+    <% end %>
+  </div>
+</div>
+
+<br class="clr" />
+<br />
+<hr />
+
+<div class="open-games col-xs-10 col-xs-offset-1">
+  <h1>Open Games</h1>
+  <div class="open">
+    <% open_games.each do |game| %>
+      <%= game.id %>
+    <% end %>
+  </div>
+</div>

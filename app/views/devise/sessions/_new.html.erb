@@ -1,0 +1,32 @@
+<div class="login">
+  <% if user_signed_in? %>
+    <span class="welcome">Welcome back <%= current_user.email %>!</span>
+    <%= link_to "Go to games", games_path, class: 'btn btn-success' %>  
+    <%= link_to "Log out", destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>    
+  <% else %>
+    <%= form_for :user, url: user_session_path, method: :post do |f| %>
+      <div class="field form-group">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+      </div>
+
+      <div class="field  form-group">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+      </div>
+
+      <%# if devise_mapping.rememberable? -%>
+    <% if Devise.mappings[:user].rememberable? -%>
+        <div class="field  form-group">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end -%>
+
+      <div class="actions">
+        <%= f.submit "Log in", class: 'btn btn-primary' %> &nbsp; &nbsp;
+        <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

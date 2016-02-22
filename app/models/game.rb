@@ -13,15 +13,27 @@ class Game < ActiveRecord::Base
   
   def initialize_deck
     @num_of_decks.times do |n|
-      new_deck = self.decks.create
-      new_deck.shuffle
+      self.decks.create
     end
   end
   
-  def deal
+  def begin_hand
+    self.hand_count += 1
+  end
+  
+  def end_hand
+    self.users { |user| user.reset_hand }
+  end
+  
+  def deal_first_hand
     users.each do |user|
-      2.times { user.cards << deal_new_card }
+      2.times { deal_new_card(user) }
     end
+  end
+  
+  def hit_player(user)
+    return false if user.card_count >= 5
+    deal_new_card(user)
   end
   
   def card_count
@@ -30,34 +42,13 @@ class Game < ActiveRecord::Base
 
   private
   
-  def deal_new_card
-    self.decks.each do
-      new_card = decks.get_next_card
-      break unless new_card.nil?
+  def deal_new_card(user)
+    self.decks.each do |deck|
+      new_card = deck.get_next_card(user)
+      return true unless new_card.nil?
     end
-#    valid_card = false
     
-#    while card do
-#      new_card = card_played?( generate_random_card )
-#      valid_card = !new_card.nil?
-#    end
-    
+    false
   end
-  
-#  def generate_random_card
-#    random_suit = rand(4)
-#    random_value = rand(13)
-#    Card.new( suit: random_suit, raw_value: random_value )
-#  end
-#
-#  def card_played?(new_card)
-#    card = cards.select do |card|
-#      card.suit == new_card.suit &&
-#      card.raw_value == new_card.raw_value &&
-#      card.played == false
-#    end.first
-#    
-#    return card unless card.nil?
-#  end
   
 end

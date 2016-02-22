@@ -15,6 +15,12 @@ class Card < ActiveRecord::Base
     "#{get_card_value} of #{suit.capitalize}"
   end
   
+  def play_card(user)
+    self.played = true
+    self.user = user
+    self.save
+  end
+  
   def ==(other_card)
     self.deck == other_card.deck &&
       self.suit == other_card.suit &&
